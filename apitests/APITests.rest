@@ -1,0 +1,55 @@
+###
+POST http://localhost:7252/api/ChatAPI HTTP/1.1
+content-type: application/json
+
+{
+"message": [
+    { "role": "user", "content": "Thanks can you make below succinct" },
+    { "role": "assistant", "content": "A leader is an individual who guides, influences, or directs a group, organization, or community toward achieving specific goals or objectives. Leaders can be found in various contexts, such as in business, politics, communities, and social movements. They often possess qualities such as vision, integrity, communication skills, empathy, and the ability to inspire and motivate others.\n\nLeaders can take many forms, including:\n\n1. **Formal Leaders:** Individuals with designated authority or managerial roles, such as CEOs, elected officials, or team managers.\n   \n2. **Informal Leaders:** Individuals who may not hold formal positions of authority but still influence others through their actions, ideas, or charisma.\n\n3. **Transformational Leaders:** Those who inspire and motivate followers to change and innovate, often focusing on higher moral and ethical values.\n   \n4. **Servant Leaders:** Leaders who prioritize the needs of their team or community, emphasizing service and collaboration over power and control.\n\nUltimately, leadership is about the ability to galvanize people towards a common purpose, encouraging teamwork, and fostering positive outcomes" }
+]
+}
+
+
+###
+POST http://localhost:7252/api/ChatAPI HTTP/1.1
+content-type: application/json
+
+{
+"message":["who is a leader","who is a follower", "who am i"]
+}
+
+###
+
+POST https://chatapi20250405141607.azurewebsites.net/api/ChatAPI HTTP/1.1
+content-type: application/json
+
+{
+"message":["who is a leader","who is a follower", "who am i"]
+}
+
+### AI APIs
+
+post https://ai-aniruddhattu0077ai613245249477.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2025-01-01-preview HTTP/1.1
+Content-Type: application/json
+api-key: {{apiKey}}
+
+{
+        "messages": [
+            {
+                "role": "user",
+                "content": "I am going to Paris, what should I see?"
+            },
+            {
+                "role": "assistant",
+                "content": "Paris, the capital of France, is known for its stunning architecture, art museums, historical landmarks, and romantic atmosphere. Here are some of the top attractions to see in Paris:\n \n 1. The Eiffel Tower: The iconic Eiffel Tower is one of the most recognizable landmarks in the world and offers breathtaking views of the city.\n 2. The Louvre Museum: The Louvre is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts, including the Mona Lisa.\n 3. Notre-Dame Cathedral: This beautiful cathedral is one of the most famous landmarks in Paris and is known for its Gothic architecture and stunning stained glass windows.\n \n These are just a few of the many attractions that Paris has to offer. With so much to see and do, it's no wonder that Paris is one of the most popular tourist destinations in the world."
+            },
+            {
+                "role": "user",
+                "content": "What is so great about #1?"
+            }
+        ],
+        "max_tokens": 4096,
+        "temperature": 1,
+        "top_p": 1,
+        "model": "gpt-4o-mini"
+    }
