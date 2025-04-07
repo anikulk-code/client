@@ -7,40 +7,6 @@ export async function getUserInfo() {
   return clientPrincipal;
 }
 
-// Internal: Calls Azure OpenAI Chat API directly
-// async function callAzureChatAPI(text) {
-//   const endpoint =
-//     "https://ai-aniruddhattu0077ai613245249477.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2023-03-15-preview";
-//   const apiKey = process.env.REACT_APP_AI_SERVICE_API_KEY;
-
-//   const body = {
-//     messages: [{ role: "user", content: text }],
-//     max_tokens: 4096,
-//     temperature: 1.0,
-//     model: "gpt-4o-mini"
-//   };
-
-//   try {
-//     const response = await fetch(endpoint, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "api-key": apiKey
-//       },
-//       body: JSON.stringify(body)
-//     });
-
-//     if (!response.ok) throw new Error(`Server error: ${response.status}`);
-
-//     const data = await response.json();
-//     const apiReply = data.choices[0]?.message?.content || "No response from API";
-//     return { reply: apiReply };
-//   } catch (error) {
-//     console.error("Azure Chat API failed:", error);
-//     return { reply: "Error calling Azure Chat API." };
-//   }
-// }
-
 // Internal: Calls middle-tier API
 async function callMiddleTierChatApi(text) {
   try {

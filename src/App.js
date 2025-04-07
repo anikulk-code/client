@@ -14,14 +14,6 @@ function App() {
     listFiles().then(setUploadedFiles);
   }, []);
 
-  // const loadFiles = async () => {
-  //   const files = await listFiles();
-  //   setUploadedFiles(files.map(name => ({
-  //     name,
-  //     url: `https://<your-storage-account>.blob.core.windows.net/uploads/${name}`
-  //   })));
-  // };
-
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
