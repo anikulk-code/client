@@ -75,3 +75,36 @@ export async function sendChatMessage(text) {
   return await callMiddleTierChatApi(text);
   // return await callAzureChatAPI(text);
 }
+
+
+export async function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await fetch('https://chatapi20250405141607.azurewebsites.net/api/UploadFile', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) throw new Error('File upload failed');
+    return await response.json(); // should return { url: "https://..." }
+  } catch (error) {
+    console.error('File upload error:', error);
+    return null;
+  }
+}
+
+export async function deleteFile(filename) {
+  try {
+    const response = await fetch(`https://chatapi20250405141607.azurewebsites.net/api/DeleteFile/${filename}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) throw new Error('File delete failed');
+    return true;
+  } catch (error) {
+    console.error('File delete error:', error);
+    return false;
+  }
+}

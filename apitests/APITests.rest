@@ -1,3 +1,15 @@
+
+###
+POST http://localhost:7252/api/ChatAPI HTTP/1.1
+content-type: application/json
+
+{
+"message": [
+    { "role": "user", "content": "Tell me about Aniruddha's startup experience from https://www.ruralhealthlinkin.com/" }
+]
+}
+
+
 ###
 POST http://localhost:7252/api/ChatAPI HTTP/1.1
 content-type: application/json
@@ -53,3 +65,17 @@ api-key: {{apiKey}}
         "top_p": 1,
         "model": "gpt-4o-mini"
     }
+
+
+
+### Upload a file to Azure Function
+
+POST http://localhost:7252/api/UploadFile
+Content-Type: multipart/form-data; boundary=boundary123
+
+--boundary123
+Content-Disposition: form-data; name="file"; filename="test.txt"
+Content-Type: text/plain
+
+This is a test file from VS Code REST Client.
+--boundary123--
