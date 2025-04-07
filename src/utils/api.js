@@ -108,3 +108,20 @@ export async function deleteFile(filename) {
     return false;
   }
 }
+
+export async function listFiles() {
+  try {
+    const response = await fetch('https://chatapi20250405141607.azurewebsites.net/api/ListFiles');
+    if (!response.ok) throw new Error('Failed to fetch files');
+
+    const fileNames = await response.json();
+
+    return fileNames.map(name => ({
+      name,
+      url: `https://your-storage-account.blob.core.windows.net/uploads/${name}`
+    }));
+  } catch (error) {
+    console.error('List files error:', error);
+    return [];
+  }
+}

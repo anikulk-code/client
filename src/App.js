@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserInfo, sendChatMessage, uploadFile, deleteFile } from './utils/api';
+import { getUserInfo, sendChatMessage, uploadFile, listFiles, deleteFile } from './utils/api';
 
 
 function App() {
@@ -11,7 +11,16 @@ function App() {
 
   useEffect(() => {
     getUserInfo().then(setUser).catch(console.error);
+    listFiles().then(setUploadedFiles);
   }, []);
+
+  // const loadFiles = async () => {
+  //   const files = await listFiles();
+  //   setUploadedFiles(files.map(name => ({
+  //     name,
+  //     url: `https://<your-storage-account>.blob.core.windows.net/uploads/${name}`
+  //   })));
+  // };
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -36,23 +45,28 @@ function App() {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    if (!file || uploadedFiles.length >= maxFiles) return;
+    if (uploadedFiles.length >= maxFiles) {
+      alert(`You can only upload up to ${maxFiles} files.`);
+      if (e.target) e.target.value = null;
+      return;
+    }
 
     const data = await uploadFile(file);
-
     if (data?.url) {
-      setUploadedFiles(prev => [...prev, { name: file.name, url: data.url }]);
+      listFiles().then(setUploadedFiles);
     } else {
       alert('File upload failed');
     }
 
-    e.target.value = null; // reset file input
+    if (e.target) {
+      e.target.value = null;
+    }
   };
 
   const handleDeleteFile = async (filename) => {
     const success = await deleteFile(filename);
     if (success) {
-      setUploadedFiles(prev => prev.filter(f => f.name !== filename));
+      listFiles().then(setUploadedFiles);
     } else {
       alert('Delete failed');
     }

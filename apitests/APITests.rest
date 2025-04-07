@@ -79,3 +79,9 @@ Content-Type: text/plain
 
 This is a test file from VS Code REST Client.
 --boundary123--
+
+###
+ get http://localhost:7252/api/ListFiles
+
+###
+ DELETE http://localhost:7252/api/delete/Profile.pdf
